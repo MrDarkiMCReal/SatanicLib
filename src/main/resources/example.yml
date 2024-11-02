@@ -1,0 +1,6 @@
+teleport-requirements:
+  - expression: '[expression] %vault_eco_balance% >= 2000'
+    denyMessage: "[message] You dont have enough coins. You have {current}. Coins needed: {required}"
+  - expression: '%homes_total% >= 2'
+    denyMessage: "[keyMessage] no_homes_left"
+globalDenyMessage: "Not enought requirements"
