@@ -34,8 +34,8 @@ public class StackUtils {
             if (parts.length > 2) {
                 ItemMeta meta = stack.getItemMeta();
                 List<String> list = Arrays.stream(parts).collect(Collectors.toList());
-                list.removeFirst();
-                list.removeFirst();
+                list.remove(0);
+                list.remove(0);
                 for (String tag : list) {
                     String[] contents = tag.split(":");
                     String tagExtracted = contents[0];
