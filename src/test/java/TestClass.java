@@ -5,10 +5,9 @@ import org.mrdarkimc.Scripts.Expression;
 import org.mrdarkimc.Scripts.Requirement;
 import org.mrdarkimc.messages.KeyedMessage;
 import org.mrdarkimc.messages.Message;
-import org.mrdarkimc.prefixHandler.PlayerCommand;
-import org.mrdarkimc.prefixHandler.ConsoleCommand;
-import org.mrdarkimc.prefixHandler.SimpleRequirement;
+import org.mrdarkimc.prefixHandler.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,8 @@ public class TestClass extends JavaPlugin {
         prefixMap.put("[text]", Message::new);
         //prefixMap.put("[requirement]", SimpleRequirement::new); //expect: List.of(Player, javaScript, Message) or List.of(Player, javaScript) //todo
         prefixMap.put("[keyedText]", KeyedMessage::new);
+        prefixMap.put("[item]", Item::new);
+        prefixMap.put("[saved]", SavedItem::new);
         //prefixMap.put("[hasItem]", )
     }
 
@@ -35,15 +36,8 @@ public class TestClass extends JavaPlugin {
     }
 
     public void Test() {
+        String lore = "penis \n penis2 \n penis 3";
 
-
-        Player player = null;
-        SimpleRequirement req = (SimpleRequirement) prefixMap.get("[sdf]").apply(List.of(player));
-        Configs config = new Configs(this, "config");
-
-
-
-        List<Map<?, ?>> list = config.get().getMapList("teleport-requirements");
 
     }
 
