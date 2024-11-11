@@ -1,22 +1,19 @@
-import org.bukkit.plugin.java.JavaPlugin;
-import org.mrdarkimc.SatanicLib.loops.StartStopAsyncTask;
-import org.mrdarkimc.SatanicLib.loops.TaskExample;
+package org.mrdarkimc.SatanicLib.prefixHandler;
+
+
+
 import org.mrdarkimc.SatanicLib.messages.KeyedMessage;
 import org.mrdarkimc.SatanicLib.messages.Message;
-import org.mrdarkimc.SatanicLib.prefixHandler.ConsoleCommand;
-import org.mrdarkimc.SatanicLib.prefixHandler.Item;
-import org.mrdarkimc.SatanicLib.prefixHandler.PlayerCommand;
-import org.mrdarkimc.SatanicLib.prefixHandler.SavedItem;
+import org.mrdarkimc.SatanicLib.prefixHandler.interfaces.PrefixInterface;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
-public class TestClass extends JavaPlugin {
-    //    public enum PrefixType{
-//        command,console,text,requrement;
-//    }
+public class PrefixMain {
     public static final Map<String, Function<List<Object>, Object>> prefixMap = new HashMap<>();
 
     //префикс - Функция (лист аргументов, обьект)
@@ -30,18 +27,18 @@ public class TestClass extends JavaPlugin {
         prefixMap.put("[saved]", SavedItem::new);
         //prefixMap.put("[hasItem]", )
     }
-
-    public void get(String... arguments) {
-
+    public static PrefixInterface get(String args){
+        String prefix = args.split(" ")[0];
+        args = (args.substring(prefix.length()+1)); //substring prefix + whitespace
+        List<Object> list = Arrays.stream(args.split(" ")).collect(Collectors.toList());
+       return (PrefixInterface) prefixMap.get(prefix).apply(list);
     }
-
-    public void Test() {
-        new StartStopAsyncTask(new TaskExample(5,5,5),this);
-
-
-    }
-
-    public void handlePrefix(String text) {
-
-    }
+//    public static final Map<String, Function<String, Object>> prefixMap = new HashMap<>();
+//
+//    static {
+//        prefixMap.put("[command]", Player::new);
+//        prefixMap.put("[console]", Admin::new);
+//        prefixMap.put("[text]", Admin::new);
+//        prefixMap.put("[requirement]", Admin::new);
+//    }
 }
