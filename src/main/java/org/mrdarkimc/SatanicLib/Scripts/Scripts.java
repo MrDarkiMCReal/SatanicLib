@@ -1,8 +1,7 @@
 package org.mrdarkimc.SatanicLib.Scripts;
 
-import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.entity.Player;
-import org.mrdarkimc.SatanicLib.prefixHandler.SimpleRequirement;
+import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.SimpleRequirement;
 
 import java.util.List;
 import java.util.Map;

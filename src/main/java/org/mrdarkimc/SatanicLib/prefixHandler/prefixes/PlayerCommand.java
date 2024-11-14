@@ -1,4 +1,4 @@
-package org.mrdarkimc.SatanicLib.prefixHandler;
+package org.mrdarkimc.SatanicLib.prefixHandler.prefixes;
 
 
 import org.mrdarkimc.SatanicLib.prefixHandler.interfaces.PrefixInterface;

@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mrdarkimc.ItemStackUtils.StackUtils;
+import org.mrdarkimc.SatanicLib.ItemStackUtils.StackUtils;
 
 import java.util.ArrayList;
 import java.util.List;

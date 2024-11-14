@@ -5,6 +5,10 @@ package org.mrdarkimc.SatanicLib.prefixHandler;
 import org.mrdarkimc.SatanicLib.messages.KeyedMessage;
 import org.mrdarkimc.SatanicLib.messages.Message;
 import org.mrdarkimc.SatanicLib.prefixHandler.interfaces.PrefixInterface;
+import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.ConsoleCommand;
+import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.Item;
+import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.PlayerCommand;
+import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.SavedItem;
 
 import java.util.Arrays;
 import java.util.HashMap;

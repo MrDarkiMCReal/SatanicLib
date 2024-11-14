@@ -1,4 +1,4 @@
-package org.mrdarkimc.SatanicLib.prefixHandler;
+package org.mrdarkimc.SatanicLib.prefixHandler.prefixes;
 
 import org.bukkit.entity.Player;
 import org.mrdarkimc.SatanicLib.Scripts.Expression;

@@ -1,0 +1,12 @@
+tags:
+  prefix:
+    text: "%luckperms_prefix%{playername}"
+    hover-event:
+      text:
+        - "&#94247AН&#95297Dа&#952E81ж&#963484м&#973987и&#973E8Aт&#98438Eе&#984891, &#9A5397ч&#9A589Bт&#9B5D9Eо &#9C67A5б&#9D6CA8ы &#9E77AEп&#9F7CB2о&#9F81B5с&#A086B8м&#A18CBCо&#A191BFт&#A296C2р&#A29BC5е&#A3A0C9т&#A4A5CCь &#A5B0D2п&#A6B5D6р&#A6BAD9о&#A7BFDCф&#A7C4E0и&#A8CAE3л&#A9CFE6ь &#AAD9EDи&#ABDEF0г&#ABE3F3р&#ACE9F6о&#ACEEFAк&#ADF3FDа"
+        - "&#94247AБыстрая статистика: "
+        - "&#94247AКлан:&#ADF3FD SATANIC"
+        - "&#94247AГруппа доната: &#ADF3FD%luckperms_prefix%"
+    click-event:
+      type: "RUN_COMMAND"
+      output: "profile %player%"
