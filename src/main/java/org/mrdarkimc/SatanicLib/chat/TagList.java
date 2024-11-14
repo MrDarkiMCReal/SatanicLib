@@ -2,7 +2,7 @@ package org.mrdarkimc.SatanicLib.chat;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
-import org.mrdarkimc.SatanicLib.Configs;
+import org.mrdarkimc.SatanicLib.configsetups.Configs;
 
 import java.util.Map;
 

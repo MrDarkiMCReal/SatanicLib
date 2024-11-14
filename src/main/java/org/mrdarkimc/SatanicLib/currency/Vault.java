@@ -5,14 +5,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.mrdarkimc.SatanicLib.SatanicLib;
 import org.mrdarkimc.SatanicLib.currency.interfaces.Currency;
 
 
 public class Vault implements Currency {
-    private final JavaPlugin plugin;
-    public Vault(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public Vault() {
         setupEconomy();
     }
 
@@ -47,10 +45,10 @@ public class Vault implements Currency {
     }
     private static Economy econ = null;
     private boolean setupEconomy() {
-        if (plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+        if (SatanicLib.getPlugin().getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-        RegisteredServiceProvider<Economy> rsp = plugin.getServer().getServicesManager().getRegistration(Economy.class);
+        RegisteredServiceProvider<Economy> rsp = SatanicLib.getPlugin().getServer().getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
             return false;
         }

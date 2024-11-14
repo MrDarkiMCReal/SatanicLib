@@ -1,13 +1,12 @@
-package org.mrdarkimc.SatanicLib;
+package org.mrdarkimc.SatanicLib.configsetups;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.mrdarkimc.SatanicLib.SatanicLib;
 import org.mrdarkimc.SatanicLib.chat.ChatTag;
 import org.mrdarkimc.SatanicLib.chat.TagList;
 import org.mrdarkimc.SatanicLib.chat.extras.ClickEvents;
@@ -23,16 +22,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class Configs {
-    private final JavaPlugin plugin;
     private File configFile;
     private FileConfiguration config;
 
 
-    public Configs(JavaPlugin plugin, String configName) {
-        this.plugin = plugin;
-        this.configFile = new File(plugin.getDataFolder(), configName + ".yml");
+    public Configs(String configName) {
+        this.configFile = new File(SatanicLib.getPlugin().getDataFolder(), configName + ".yml");
         if (!this.configFile.exists()) {
-            plugin.saveResource(configName + ".yml", false);
+            SatanicLib.getPlugin().saveResource(configName + ".yml", false);
         }
         this.config = YamlConfiguration.loadConfiguration(configFile);
     }

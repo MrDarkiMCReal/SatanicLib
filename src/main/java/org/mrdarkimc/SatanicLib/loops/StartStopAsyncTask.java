@@ -1,19 +1,17 @@
 package org.mrdarkimc.SatanicLib.loops;
 
 
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.mrdarkimc.SatanicLib.SatanicLib;
 import org.mrdarkimc.SatanicLib.taskManager.interfaces.TimedTask;
 
 public class StartStopAsyncTask {
     private final TimedTask task;
-    private final JavaPlugin plugin;
     private final long delayPluginBoot;
     private final long taskActiveTimeInTicks;
     private final long timeBetweenActivation;
-    public StartStopAsyncTask(TimedTask task, JavaPlugin plugin) {
+    public StartStopAsyncTask(TimedTask task) {
         this.task = task;
-        this.plugin = plugin;
         this.delayPluginBoot = task.getDelayPluginBoot();
         this.timeBetweenActivation = task.getTimeBetweenActivation();
         this.taskActiveTimeInTicks = task.getTaskActiveTimeInTicks();
@@ -28,7 +26,7 @@ public class StartStopAsyncTask {
             public void run() {
                 activate();
             }
-        }.runTaskLaterAsynchronously(plugin, ticks);
+        }.runTaskLaterAsynchronously(SatanicLib.getPlugin(), ticks);
     }
     public void deactivateAfter(long ticks){
         new BukkitRunnable() {
@@ -36,7 +34,7 @@ public class StartStopAsyncTask {
             public void run() {
                 deactivate();
             }
-        }.runTaskLaterAsynchronously(plugin, ticks);
+        }.runTaskLaterAsynchronously(SatanicLib.getPlugin(), ticks);
     }
     public void activateAfter(long ticks){
         new BukkitRunnable() {
@@ -44,7 +42,7 @@ public class StartStopAsyncTask {
             public void run() {
                 activate();
             }
-        }.runTaskLaterAsynchronously(plugin, ticks);
+        }.runTaskLaterAsynchronously(SatanicLib.getPlugin(), ticks);
     }
     public void activate(){
         task.activate();

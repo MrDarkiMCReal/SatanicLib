@@ -2,7 +2,8 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mrdarkimc.SatanicLib.Configs;
+import org.mrdarkimc.SatanicLib.SatanicLib;
+import org.mrdarkimc.SatanicLib.configsetups.Configs;
 import org.mrdarkimc.SatanicLib.chat.ChatTag;
 import org.mrdarkimc.SatanicLib.chat.ChatUtils;
 import org.mrdarkimc.SatanicLib.chat.SimpleMessage;
@@ -45,8 +46,9 @@ public class TestClass extends JavaPlugin {
     }
 
     public void Test() {
-        Configs main = new Configs(this,"config");
-        new StartStopAsyncTask(new TaskExample(5,5,5),this);
+        SatanicLib.setupLib(this);
+        Configs main = new Configs("config");
+        new StartStopAsyncTask(new TaskExample(5,5,5));
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             new ChatTag(onlinePlayer,"trweqe",
                     new ShowText("123"),

@@ -23,6 +23,9 @@ public class StackUtils {
         //stone 1 name:"peska penis" lore:"supa \nlore \nbitch" enchants:"sharpness:5,protection:5"
         //potion 1 potion:"speed:5,weakness"
         //input = "STONE 1 name:\"custom name\" lore:\"custom lore\" enchants:\"sharpness:5,protection:5\"";
+        if (input.startsWith("[saved]")){
+            String saveditem = input.split(" ")[1];
+        }
         String[] parts = input.split(" ");
         Material material = Material.valueOf(parts[0].toUpperCase());
         int amount = Integer.parseInt(parts[1]);

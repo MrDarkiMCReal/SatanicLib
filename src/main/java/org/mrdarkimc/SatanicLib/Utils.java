@@ -4,8 +4,8 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.MerchantRecipe;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.mrdarkimc.SatanicLib.ItemStackUtils.StackUtils;
+import org.mrdarkimc.SatanicLib.configsetups.Configs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,9 @@ public class Utils {
         player.sendMessage(message);
     }
 
-    public static List<MerchantRecipe> deserealizeRecipes(JavaPlugin plugin, Configs config) {
+    public static List<MerchantRecipe> deserealizeRecipes(Configs config) {
         List<MerchantRecipe> recipes = new ArrayList<>();
-        List<Map<?, ?>> trades = plugin.getConfig().getMapList("trades");
+        List<Map<?, ?>> trades = SatanicLib.getPlugin().getConfig().getMapList("trades");
 
 
         for (Map<?, ?> trade : trades) {
