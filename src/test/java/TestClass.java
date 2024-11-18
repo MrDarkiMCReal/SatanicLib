@@ -46,7 +46,9 @@ public class TestClass extends JavaPlugin {
     }
 
     public void Test() {
+        saveDefaultConfig();
         SatanicLib.setupLib(this);
+        Configs.Defaults.setupItemStackSaver();
         Configs main = new Configs("config");
         new StartStopAsyncTask(new TaskExample(5,5,5));
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {

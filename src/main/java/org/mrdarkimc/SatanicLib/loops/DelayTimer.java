@@ -39,19 +39,41 @@ public class DelayTimer {
     }
 
     private static String formatTime(long seconds) {
-        String secondsFormat = "сек.";
-        String minutesFormat = "мин.";
+        long hours = seconds / 3600;
+        long minutes = (seconds % 3600) / 60;
+        long secs = seconds % 60;
 
-        if (seconds != 0) {
-            long mins = seconds / 60;
-            long lastSeconds = seconds % 60;
-            if (mins > 0) {
-                return String.format("%d %s %d %s", mins, minutesFormat, lastSeconds, secondsFormat);
-            } else {
-                return String.format("%d %s", lastSeconds, secondsFormat);
-            }
+        StringBuilder result = new StringBuilder();
+
+        if (hours > 0) {
+            result.append(hours).append(" ч.");
         }
-        return "0 сек.";
+        if (minutes > 0) {
+            if (result.length() > 0) result.append(" ");
+            result.append(minutes).append(" мин.");
+        }
+        if (secs > 0 || result.length() == 0) {
+            if (result.length() > 0) result.append(" ");
+            result.append(secs).append(" сек.");
+        }
+
+        return result.toString();
+
+//        String hoursFormat = "ч.";
+//        String minutesFormat = "мин.";
+//        String secondsFormat = "сек.";
+//
+//        if (seconds != 0) {
+//            long hours = seconds/3600;
+//            long mins = seconds / 60;
+//            long lastSeconds = seconds % 60;
+//            if (mins > 0) {
+//                return String.format("%h %hf %m %mf %s %sf", hours, hoursFormat, mins, minutesFormat, lastSeconds, secondsFormat);
+//            } else {
+//                return String.format("%d %s", lastSeconds, secondsFormat);
+//            }
+//        }
+//        return "0 сек.";
     }
     public static void setTimer(Player player, long secounds, boolean bukkitTask){
         long endTime = System.currentTimeMillis() + (secounds * 1000);
