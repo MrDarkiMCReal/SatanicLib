@@ -84,6 +84,9 @@ public class StackUtils {
                 case "potion":
                     PotionHandler.applyToMeta(meta,value);
                     break;
+                case "arrow":
+                    ArrowHandler.applyToMeta(meta,value);
+                    break;
             }
 
         }

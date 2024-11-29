@@ -4,3 +4,36 @@ teleport-requirements:
   - expression: '%homes_total% >= 2'
     denyMessage: "[keyMessage] no_homes_left"
 globalDenyMessage: "Not enought requirements"
+
+
+general:
+  pagesPrice:
+    1: 25000
+    2: 50000
+    3: 75000
+auctions:
+  '1':
+    CitizensID: 'Auctioneer1' #локация, скин и название все будет через плагин Citizens
+    timeLimit: 1800 #Глобальный таймер, по окончанию которого самая последняя ставка побеждает, и аукционер пропадает
+    items: #список предметов
+        - item: 'DIAMOND_SWORD 1' #стандартный предмет
+          timeLimit: 200 #таймер по окончанию которого последняя ставка на лот побеждает, и активируется новый лот (если он есть)
+          startPrice: '150000'
+          currency: 'Vault'
+        - item: '[saved] godSword' #сохраненный предмет, который будет хранится в файле savedItems.yml Сохранить предмет можно командой /<название плагина> save <название предмета>
+          timeLimit: 200 #таймер по окончанию которого последняя ставка на лот побеждает, и активируется новый лот (если он есть)
+          startPrice: '200000'
+          currency: 'PlayerPoints'
+    itemOffset: #это для предмета, леветирующего в воздухе. Сейчас настроен так, что бы был над головой NPC
+      x: 0
+      y: 2
+      z: 0
+    DecentHologramsFormat:
+      - 'Разыгрываемый предмет'
+      - '{itemName}'
+      - 'Текущая ставка: {currentBid} от {bidOwner}'
+      - '&7------------'
+    holoOffset:
+      x: 0
+      y: 5
+      z: 0

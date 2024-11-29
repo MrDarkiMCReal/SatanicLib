@@ -46,6 +46,7 @@ public class Configs {
         List<Map<?, ?>> trades = this.config.getMapList(path);
 
 
+
         for (Map<?, ?> trade : trades) {
             String result = (String) trade.get("item");
             List<String> ingridients = (List<String>) trade.get("recipe");
