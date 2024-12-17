@@ -14,7 +14,7 @@ public class Requirement {
     boolean result;
 
     //Делает проверку и отправляет сообщение если оно не Null
-    public Requirement(Player player,Expression expression, String denyMessage) {
+    public Requirement(Player player, Expression expression, String denyMessage) {
         this.message = new Message(List.of(player, denyMessage, Map.of("{current}", expression.getCurrentValue(),"{required}",expression.getRequiredValue())));
         this.result = Scripts.handleRequirement(expression);
     }

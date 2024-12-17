@@ -4,7 +4,12 @@ teleport-requirements:
   - expression: '%homes_total% >= 2'
     denyMessage: "[keyMessage] no_homes_left"
 globalDenyMessage: "Not enought requirements"
-
+messages:
+  reach-maximum-homes:
+    enable: true
+    text:
+      - 'This is fancy text parsed with PAPI & hex support'
+      - '&7 Dear %player_name%, your homes count: {homesCount}'
 
 general:
   pagesPrice:

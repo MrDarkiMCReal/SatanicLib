@@ -1,3 +1,4 @@
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,11 +16,10 @@ import org.mrdarkimc.SatanicLib.messages.KeyedMessage;
 import org.mrdarkimc.SatanicLib.messages.Message;
 import org.mrdarkimc.SatanicLib.prefixHandler.prefixes.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestClass extends JavaPlugin {
     //    public enum PrefixType{
@@ -33,7 +33,7 @@ public class TestClass extends JavaPlugin {
         prefixMap.put("[command]", PlayerCommand::new);
         prefixMap.put("[console]", ConsoleCommand::new);
         prefixMap.put("[text]", Message::new);
-        //prefixMap.put("[requirement]", SimpleRequirement::new); //expect: List.of(Player, javaScript, Message) or List.of(Player, javaScript) //todo
+        prefixMap.put("[requirement]", SimpleRequirement::new); //expect: List.of(Player, javaScript, Message) or List.of(Player, javaScript) //todo
         prefixMap.put("[keyedText]", KeyedMessage::new);
         prefixMap.put("[item]", Item::new);
         prefixMap.put("[saved]", SavedItem::new);
@@ -59,8 +59,9 @@ public class TestClass extends JavaPlugin {
             onlinePlayer.spigot().sendMessage(component);
             main.getTagList(onlinePlayer,"tags",Collections.emptyMap()).send();
         }
+        List<String> actionList = new ArrayList<>();
 
-
+        //TestClass.handlePrefix(player, new KeyedMessage(player,));
 
 
     }
@@ -68,7 +69,27 @@ public class TestClass extends JavaPlugin {
         SimpleMessage.ToPlayer.sendListMessages(player,List.of("g"),Map.of("key","value"));
     }
 
-    public void handlePrefix(String text) {
+
+    public static void handlePrefix(Player player, String text, Map<String, String> placeholders) {
+        Pattern pattern = Pattern.compile("^\\[[^\\]]+\\]");
+        Matcher matcher = pattern.matcher(text);
+        for (Map.Entry<String, String> stringStringEntry : placeholders.entrySet()) {
+            text = text.replace(stringStringEntry.getKey(),stringStringEntry.getValue());
+        }
+        text = PlaceholderAPI.setPlaceholders(player,text);
+        if (matcher.find()){
+            text = text.substring(matcher.group().length()+1); //+1 with space
+            switch (matcher.group()){
+                case "[console]":
+                    //todo создать отдельные хандлеры для команд, звуков, реквайрментов, и т.д
+                    new ConsoleCommand(text);
+                    break;
+                case "[command]":
+                    //todo создать отдельные хандлеры для команд, звуков, реквайрментов, и т.д
+                    new Command(player,text);
+                    break;
+            }
+        }
 
     }
 }
