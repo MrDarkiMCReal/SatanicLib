@@ -24,7 +24,7 @@ public class Message implements MessageInterface{
     public Message(Player player, String text, Map<String, String> placeholders) {
         if (placeholders != null){
             for (Map.Entry<String, String> s : placeholders.entrySet()) {
-                text = text.replaceAll(s.getKey(),s.getValue());
+                text = text.replace(s.getKey(),s.getValue());
             }
         }
         text = PlaceholderAPI.setPlaceholders(player, text);
@@ -36,7 +36,7 @@ public class Message implements MessageInterface{
     public Message(String text, Map<String, String> placeholders) {
         if (placeholders != null){
             for (Map.Entry<String, String> s : placeholders.entrySet()) {
-                text = text.replaceAll(s.getKey(),s.getValue());
+                text = text.replace(s.getKey(),s.getValue());
             }
         }
         text = Utils.translateHex(text);
