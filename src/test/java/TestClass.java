@@ -45,6 +45,13 @@ public class TestClass extends JavaPlugin {
 
     }
 
+    public static void main(String[] args) {
+        int[] ints = new int[2];
+        for (int i = 0; i < ints.length+10; i++) {
+            System.out.println(ints[i]);
+        }
+    }
+
     public void Test() {
         saveDefaultConfig();
         SatanicLib.setupLib(this);

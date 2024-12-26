@@ -7,9 +7,11 @@ import net.md_5.bungee.api.chat.hover.content.Text;
 import org.mrdarkimc.SatanicLib.chat.interfaces.IChatTag;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class ChatUtils {
     public static TextComponent translateComponentHex(String text) {
@@ -42,15 +44,16 @@ public class ChatUtils {
     public static ArrayList<Content> stringListToContentList(List<String> hoverMessage) {
         ArrayList<Content> contentList = new ArrayList<>();
 
-
+        List<String> list2 = new ArrayList<>();
         for (String s : hoverMessage) {
-
             if (!hoverMessage.get(hoverMessage.size()-1).equals(s)){
-                s = s + "\n";
+                list2.add(s + "\n");
+            }else {
+                list2.add(s);
             }
-            contentList.add(new Text(translateComponentHex(s).getText()));
-
         }
+        TextComponent[] comps = list2.stream().map(ChatUtils::translateComponentHex).toArray(TextComponent[]::new);
+        contentList.add(new Text(comps));
         return contentList;
         //output (colored)
         //Клан игрока: SATANIC
@@ -73,7 +76,7 @@ public class ChatUtils {
         TextComponent previous = null;
         for (int i = chatTagList.size()-1; i >= 0; i--) {
             if (i==0) {
-                return previous;
+                return previous == null ? chatTagList.get(0).getComponent() : previous;
             }
             TextComponent last = previous==null ? chatTagList.get(i).getComponent() : previous;
             TextComponent stackToMe = chatTagList.get(i-1).getComponent();

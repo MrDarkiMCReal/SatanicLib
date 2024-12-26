@@ -40,7 +40,6 @@ public class Prefix {
         String prefix = args.split(" ")[0];
         args = (args.substring(prefix.length()+1)); //substring prefix + whitespace
         List<Object> list = Arrays.stream(args.split(" ")).collect(Collectors.toList());
-        handle(Bukkit.getPlayer("sdfg"),"hi {player}",Map.of("{player}","name"));
        return (PrefixInterface) prefixMap.get(prefix).apply(list);
     }
     public static void handle(Player player, String text, Map<String, String> placeholders) {
@@ -66,6 +65,9 @@ public class Prefix {
                     break;
                 case "[keyedText]":
                     new KeyedMessage(player,text,placeholders).send();
+                    break;
+                case "[sound]":
+                    new Sound(player,text);
                     break;
                 default:
                     Bukkit.getLogger().warning("[SatanicLib] Prefix: " + text + " did not recognized. Ignoring this key complitely. Allowed: " + prefixMap.keySet().toString());
