@@ -2,6 +2,8 @@ package org.mrdarkimc.SatanicLib.configsetups;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,6 +12,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.mrdarkimc.SatanicLib.ItemStackUtils.StackUtils;
 import org.mrdarkimc.SatanicLib.SatanicLib;
 import org.mrdarkimc.SatanicLib.chat.ChatTag;
+import org.mrdarkimc.SatanicLib.chat.ChatUtils;
 import org.mrdarkimc.SatanicLib.chat.TagList;
 import org.mrdarkimc.SatanicLib.chat.extras.ClickEvents;
 import org.mrdarkimc.SatanicLib.chat.extras.ShowText;
@@ -84,6 +87,68 @@ public class Configs {
     }
     public TagList getTagList(Player player, String path, Map<String, String> localPlaceholders){
     return new TagList(player, path, localPlaceholders, this); //todo memory leak? replace with chattag config
+    }
+    public TextComponent getTextComponent(Player player, String path, Map<String, String> localPlaceholders){
+        TextComponent component = new TextComponent("");
+
+        String text = null;
+        ClickEvent clickEvent = null;
+        HoverEvent hoverEvent = null;
+
+        Set<String> properties = get().getConfigurationSection(path).getKeys(false);
+        List<IChatExtra> list = new ArrayList<>();
+        for (String property : properties) {
+            switch (property) {
+                case "text":
+                    String textFromConfig = get().getString(path + ".text");
+                    text = textFromConfig;
+                    if (localPlaceholders !=null) {
+                        for (Map.Entry<String, String> stringStringEntry : localPlaceholders.entrySet()) {
+                            text = text.replace(stringStringEntry.getKey(),stringStringEntry.getValue());
+                        }
+                    }
+                    text = PlaceholderAPI.setPlaceholders(player, text);
+                    break;
+                case "hover-event":
+                    List<String> hoverMessage = get().getStringList(path + ".hover-event.text");
+                    hoverMessage.replaceAll((line) -> PlaceholderAPI.setPlaceholders(player, line));
+                    if (localPlaceholders !=null) {
+                        hoverMessage.replaceAll(line -> {
+                            for (Map.Entry<String, String> stringStringEntry : localPlaceholders.entrySet()) {
+                                line = line.replace(stringStringEntry.getKey(), stringStringEntry.getValue());
+                            }
+                            return line;
+                        });
+                    }
+                    hoverEvent = new HoverEvent(HoverEvent.Action.SHOW_TEXT, ChatUtils.stringListToContentList(hoverMessage));
+                    break;
+                case "click-event":
+                    ConfigurationSection section = get().getConfigurationSection(path + ".click-event");
+                    String action = section.getString("type");
+                    String output = PlaceholderAPI.setPlaceholders(player, section.getString("output"));
+                    if (localPlaceholders !=null) {
+                        for (Map.Entry<String, String> stringStringEntry : localPlaceholders.entrySet()) {
+                            output = output.replace(stringStringEntry.getKey(), stringStringEntry.getValue());
+                        }
+                    }
+                    clickEvent = new ClickEvent(ClickEvent.Action.valueOf(action),output);
+                    break;
+                default: //skip
+                    break;
+            }
+
+        }
+        if (text!=null){
+            component.addExtra(ChatUtils.translateComponentHex(text));
+        }
+        if (hoverEvent!=null){
+            component.setHoverEvent(hoverEvent);
+        }
+        if (clickEvent!=null){
+            component.setClickEvent(clickEvent);
+        }
+
+        return component;
     }
 
     public IChatTag getChatTag(Player player, String path, Map<String, String> localPlaceholders) {

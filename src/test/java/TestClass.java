@@ -46,12 +46,16 @@ public class TestClass extends JavaPlugin {
     }
 
     public static void main(String[] args) {
-        int[] ints = new int[2];
-        for (int i = 0; i < ints.length+10; i++) {
-            System.out.println(ints[i]);
+        new Smth("");
+    }
+public static class Smth{
+    public Smth(String key, Integer... integers) {
+        System.out.println(key);
+        for (Integer integer : integers) {
+            System.out.println(integer);
         }
     }
-
+}
     public void Test() {
         saveDefaultConfig();
         SatanicLib.setupLib(this);
